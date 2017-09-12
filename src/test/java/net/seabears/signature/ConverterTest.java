@@ -1,6 +1,5 @@
 package net.seabears.signature;
 
-import net.seabears.signature.util.TestUtils;
 import org.junit.jupiter.api.Test;
 
 import java.awt.Color;
@@ -53,7 +52,6 @@ public class ConverterTest {
         final List<Curve> points = buildPointsForSquare();
         final Config config = Config.builder().withBackground(Color.BLUE).withForeground(Color.RED).build();
         final RenderedImage image = new Converter(config).convert(points);
-        TestUtils.save(image, "/home/corey/test-color.png");
         assertEquals(111, image.getWidth());
         assertEquals(56, image.getHeight());
         assertArrayEquals(new int[] {255, 0, 0, 255}, image.getData().getPixel(0, 0, new int[4]));
