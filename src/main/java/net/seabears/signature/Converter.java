@@ -7,31 +7,37 @@ import java.awt.image.RenderedImage;
 import java.util.List;
 import java.util.function.BiPredicate;
 
+import static java.util.stream.Collectors.toList;
+
 public class Converter {
-    public RenderedImage convert(final List<Point> points) {
-        final Point maximum = getPoint(points, Point.MIN_VALUE, (a, b) -> a > b);
-        final Point minimum = getPoint(points, Point.MAX_VALUE, (a, b) -> a < b);
+    public RenderedImage convert(final byte[] data, final Format format) {
+        final List<Curve> points = format.getFactory().parse(data);
+        return convert(points);
+    }
+
+    RenderedImage convert(final List<Curve> curves) {
+        final List<Point> allPoints = flatten(curves);
+        final Point maximum = getPoint(allPoints, Point.MIN_VALUE, (a, b) -> a > b);
+        final Point minimum = getPoint(allPoints, Point.MAX_VALUE, (a, b) -> a < b);
         final Point offset = minimum.negate();
 
         final BufferedImage image = createImage(maximum, minimum);
         final Graphics2D g = initImage(image);
-        Point previous = Point.PEN_UP;
-        for (Point point : points) {
-            if (point != Point.PEN_UP && previous != Point.PEN_UP) {
-                drawLine(g, previous, point, offset);
-            }
-            previous = point;
-        }
+        curves.forEach(curve -> drawCurve(g, curve, offset));
         return image;
+    }
+
+    private static List<Point> flatten(final List<Curve> curves) {
+        return curves.stream()
+                .map(Curve::getPoints)
+                .flatMap(List::stream)
+                .collect(toList());
     }
 
     private static Point getPoint(final List<Point> points, final Point initial, final BiPredicate<Integer, Integer> test) {
         int x = initial.getX();
         int y = initial.getY();
         for (Point point : points) {
-            if (point == Point.PEN_UP) {
-                continue;
-            }
             if (test.test(point.getX(), x)) {
                 x = point.getX();
             }
@@ -54,6 +60,16 @@ public class Converter {
         g.clearRect(0, 0, image.getWidth(), image.getHeight());
         g.setColor(Color.BLACK);
         return g;
+    }
+
+    private static void drawCurve(final Graphics2D g, final Curve curve, final Point offset) {
+        Point previous = null;
+        for (Point point : curve.getPoints()) {
+            if (previous != null) {
+                drawLine(g, previous, point, offset);
+            }
+            previous = point;
+        }
     }
 
     private static void drawLine(final Graphics2D g, final Point start, final Point end, final Point offset) {

@@ -6,7 +6,6 @@ final class Point {
     static final Point MAX_VALUE = new Point(Integer.MAX_VALUE, Integer.MAX_VALUE);
     static final Point MIN_VALUE = new Point(Integer.MIN_VALUE, Integer.MIN_VALUE);
     static final Point EMPTY = new Point(0, 0);
-    static final Point PEN_UP = new Point(0, 0);
 
     private final int x, y;
 

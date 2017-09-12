@@ -11,18 +11,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ConverterTest {
     @Test
     public void testConvertSquare() {
-        final List<Point> points = new LinkedList<>();
-        points.add(Point.valueOf(-10, -5));
-        points.add(Point.valueOf(100, -5));
-        points.add(Point.PEN_UP);
-        points.add(Point.valueOf(100, -5));
-        points.add(Point.valueOf(100, 50));
-        points.add(Point.PEN_UP);
-        points.add(Point.valueOf(100, 50));
-        points.add(Point.valueOf(-10, 50));
-        points.add(Point.PEN_UP);
-        points.add(Point.valueOf(-10, 50));
-        points.add(Point.valueOf(-10, -5));
+        final List<Curve> points = new LinkedList<>();
+        Curve curve = new Curve();
+        points.add(curve);
+        curve.add(Point.valueOf(-10, -5));
+        curve.add(Point.valueOf(100, -5));
+        curve = new Curve();
+        points.add(curve);
+        curve.add(Point.valueOf(100, -5));
+        curve.add(Point.valueOf(100, 50));
+        curve = new Curve();
+        points.add(curve);
+        curve.add(Point.valueOf(100, 50));
+        curve.add(Point.valueOf(-10, 50));
+        curve = new Curve();
+        points.add(curve);
+        curve.add(Point.valueOf(-10, 50));
+        curve.add(Point.valueOf(-10, -5));
 
         final RenderedImage image = new Converter().convert(points);
         assertEquals(111, image.getWidth());
@@ -31,15 +36,19 @@ public class ConverterTest {
 
     @Test
     public void testConvertLightningBolt() {
-        final List<Point> points = new LinkedList<>();
-        points.add(Point.valueOf(-10, -5));
-        points.add(Point.valueOf(45, 30));
-        points.add(Point.PEN_UP);
-        points.add(Point.valueOf(45, 30));
-        points.add(Point.valueOf(45, 15));
-        points.add(Point.PEN_UP);
-        points.add(Point.valueOf(45, 15));
-        points.add(Point.valueOf(100, 50));
+        final List<Curve> points = new LinkedList<>();
+        Curve curve = new Curve();
+        points.add(curve);
+        curve.add(Point.valueOf(-10, -5));
+        curve.add(Point.valueOf(45, 30));
+        curve = new Curve();
+        points.add(curve);
+        curve.add(Point.valueOf(45, 30));
+        curve.add(Point.valueOf(45, 15));
+        curve = new Curve();
+        points.add(curve);
+        curve.add(Point.valueOf(45, 15));
+        curve.add(Point.valueOf(100, 50));
 
         final RenderedImage image = new Converter().convert(points);
         assertEquals(111, image.getWidth());

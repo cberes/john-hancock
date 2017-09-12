@@ -1,40 +1,48 @@
 package net.seabears.signature;
 
-import java.util.LinkedList;
 import java.util.List;
 
-class VectorTextFactory {
-    private static final int PEN_UP_X = 0;
-    private static final int PEN_UP_Y = 0xFFFF;
-    private static final String END_TOKEN = "~";
+class VectorTextFactory implements PointFactory {
+    private static final Point PEN_UP = Point.valueOf(0, 0xFFFF);
+    private static final String POINT_DELIMITER = ",";
 
-    List<Point> parse(final String data) {
-        final List<Point> points = new LinkedList<>();
-        final String[] textPoints = data.split("\\^");
-        for (String textPoint : textPoints) {
-            if (!END_TOKEN.equals(textPoint)) {
-                points.add(parsePoint(textPoint));
+    @Override
+    public List<Curve> parse(final byte[] data) {
+        final CurvesBuilder builder = new CurvesBuilder();
+        for (String textPoint : splitIntoPoints(data)) {
+            if (isPossiblePoint(textPoint)) {
+                final Point point = createPoint(textPoint);
+                process(point, builder);
             }
         }
-        return points;
+        return builder.build();
     }
 
-    private static Point parsePoint(final String s) {
-        final String[] coords = s.split(",");
+    private static String[] splitIntoPoints(final byte[] data) {
+        final String text = new String(data);
+        return text.split("\\^");
+    }
+
+    private static boolean isPossiblePoint(final String s) {
+        return s.contains(POINT_DELIMITER);
+    }
+
+    private static Point createPoint(final String point) {
+        final String[] coords = point.split(POINT_DELIMITER);
         final int x = Integer.parseInt(coords[0]);
         final int y = Integer.parseInt(coords[1]);
-        return createPoint(x, y);
+        return Point.valueOf(x, y);
     }
 
-    private static Point createPoint(final int x, final int y) {
-        if (isPenUp(x, y)) {
-            return Point.PEN_UP;
+    private static void process(final Point p, final CurvesBuilder builder) {
+        if (isPenUp(p)) {
+            builder.newCurve();
         } else {
-            return Point.valueOf(x, y);
+            builder.add(p);
         }
     }
 
-    private static boolean isPenUp(final int x, final int y) {
-        return x == PEN_UP_X && y == PEN_UP_Y;
+    private static boolean isPenUp(final Point p) {
+        return PEN_UP.equals(p);
     }
 }

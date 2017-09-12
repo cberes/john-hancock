@@ -8,7 +8,7 @@ public class PointTest {
     @Test
     public void testValueOf() {
         assertSame(Point.EMPTY, Point.valueOf(0, 0));
-        assertSame(Point.PEN_UP, Point.valueOf(-1, -1));
+        assertNotSame(Point.EMPTY, Point.valueOf(-1, -1));
     }
 
     @Test
@@ -27,7 +27,7 @@ public class PointTest {
     public void testEquals() {
         assertTrue(Point.valueOf(1, 2).equals(Point.valueOf(1, 2)));
         assertTrue(Point.EMPTY.equals(Point.valueOf(0, 0)));
-        assertFalse(Point.EMPTY.equals(Point.PEN_UP));
+        assertFalse(Point.EMPTY.equals(Point.MAX_VALUE));
         assertFalse(Point.EMPTY.equals(null));
         assertFalse(Point.EMPTY.equals("not a point"));
     }

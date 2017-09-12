@@ -14,6 +14,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VectorTextTest {
     @Test
+    public void testPoints() throws IOException {
+        final byte[] data = readData("vector-0.txt");
+        final List<Curve> points = new VectorTextFactory().parse(data);
+        assertEquals(2, points.size());
+        assertEquals(2, points.get(0).getPoints().size());
+        assertEquals(Point.valueOf(10, 10), points.get(0).getPoints().get(0));
+        assertEquals(Point.valueOf(110, 110), points.get(0).getPoints().get(1));
+        assertEquals(2, points.get(1).getPoints().size());
+        assertEquals(Point.valueOf(10, 110), points.get(1).getPoints().get(0));
+        assertEquals(Point.valueOf(110, 10), points.get(1).getPoints().get(1));
+    }
+
+    private byte[] readData(final String name) throws IOException {
+        final URL url = getClass().getResource('/' + name);
+        return IOUtils.toByteArray(url);
+    }
+
+    @Test
     public void testLetterX() throws IOException {
         final RenderedImage image = createImage("vector-0.txt");
         assertEquals(101, image.getWidth());
@@ -30,10 +48,8 @@ public class VectorTextTest {
     }
 
     private RenderedImage createImage(final String name) throws IOException {
-        final URL url = getClass().getResource('/' + name);
-        final String data = IOUtils.toString(url, StandardCharsets.UTF_8);
-        final List<Point> points = new VectorTextFactory().parse(data);
-        return  new Converter().convert(points);
+        final byte[] data = readData(name);
+        return new Converter().convert(data, Format.VECTOR_TEXT);
     }
 
     @Test
