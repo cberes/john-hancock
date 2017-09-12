@@ -1,6 +1,5 @@
 package net.seabears.signature;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
@@ -10,6 +9,16 @@ import java.util.function.BiPredicate;
 import static java.util.stream.Collectors.toList;
 
 public class Converter {
+    private final Config config;
+
+    public Converter() {
+        this(Config.DEFAULT);
+    }
+
+    public Converter(final Config config) {
+        this.config = config;
+    }
+
     public RenderedImage convert(final byte[] data, final Format format) {
         final List<Curve> points = format.getFactory().parse(data);
         return convert(points);
@@ -19,7 +28,7 @@ public class Converter {
         final List<Point> allPoints = flatten(curves);
         final Point maximum = getPoint(allPoints, Point.MIN_VALUE, (a, b) -> a > b);
         final Point minimum = getPoint(allPoints, Point.MAX_VALUE, (a, b) -> a < b);
-        final Point offset = minimum.negate();
+        final Point offset = minimum.negate().add(Point.valueOf(config.getPadding(), config.getPadding()));
 
         final BufferedImage image = createImage(maximum, minimum);
         final Graphics2D g = initImage(image);
@@ -48,17 +57,19 @@ public class Converter {
         return Point.valueOf(x, y);
     }
 
-    private static BufferedImage createImage(final Point maximum, final Point minimum) {
-        final int width = maximum.getX() - minimum.getX() + 1;
-        final int height = maximum.getY() - minimum.getY() + 1;
-        return new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+    private BufferedImage createImage(final Point maximum, final Point minimum) {
+        final int totalPadding = config.getPadding() * 2;
+        final int width = maximum.getX() - minimum.getX() + 1 + totalPadding;
+        final int height = maximum.getY() - minimum.getY() + 1 + totalPadding;
+        final int imageType = config.isGrayscale() ? BufferedImage.TYPE_BYTE_GRAY : BufferedImage.TYPE_INT_ARGB;
+        return new BufferedImage(width, height, imageType);
     }
 
-    private static Graphics2D initImage(final BufferedImage image) {
+    private Graphics2D initImage(final BufferedImage image) {
         final Graphics2D g = image.createGraphics();
-        g.setBackground(Color.WHITE);
+        g.setBackground(config.getBackground());
         g.clearRect(0, 0, image.getWidth(), image.getHeight());
-        g.setColor(Color.BLACK);
+        g.setColor(config.getForeground());
         return g;
     }
 
