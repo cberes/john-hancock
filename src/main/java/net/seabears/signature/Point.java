@@ -23,6 +23,14 @@ final class Point {
         return y;
     }
 
+    public Point add(final Point other) {
+        return valueOf(x + other.x, y + other.y);
+    }
+
+    public Point negate() {
+        return valueOf(-x, -y);
+    }
+
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
