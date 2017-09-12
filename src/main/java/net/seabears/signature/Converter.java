@@ -29,6 +29,9 @@ public class Converter {
         int x = initial.getX();
         int y = initial.getY();
         for (Point point : points) {
+            if (point == Point.PEN_UP) {
+                continue;
+            }
             if (test.test(point.getX(), x)) {
                 x = point.getX();
             }
@@ -48,7 +51,7 @@ public class Converter {
     private static Graphics2D initImage(final BufferedImage image) {
         final Graphics2D g = image.createGraphics();
         g.setBackground(Color.WHITE);
-        g.clearRect(0, 0, image.getWidth() - 1, image.getHeight() - 1);
+        g.clearRect(0, 0, image.getWidth(), image.getHeight());
         g.setColor(Color.BLACK);
         return g;
     }

@@ -6,7 +6,7 @@ final class Point {
     static final Point MAX_VALUE = new Point(Integer.MAX_VALUE, Integer.MAX_VALUE);
     static final Point MIN_VALUE = new Point(Integer.MIN_VALUE, Integer.MIN_VALUE);
     static final Point EMPTY = new Point(0, 0);
-    static final Point PEN_UP = new Point(-1, -1);
+    static final Point PEN_UP = new Point(0, 0);
 
     private final int x, y;
 
@@ -57,8 +57,6 @@ final class Point {
     static Point valueOf(final int x, final int y) {
         if (x == EMPTY.x && y == EMPTY.y) {
             return EMPTY;
-        } else if (x == PEN_UP.x && y == PEN_UP.y) {
-            return PEN_UP;
         } else {
             return new Point(x, y);
         }
