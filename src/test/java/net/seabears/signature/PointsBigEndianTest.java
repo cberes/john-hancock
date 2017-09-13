@@ -1,6 +1,5 @@
 package net.seabears.signature;
 
-import net.seabears.signature.util.TestUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
@@ -47,9 +46,5 @@ public class PointsBigEndianTest {
         final RenderedImage image = new Converter().convert(data, Format.POINTS_BIG_ENDIAN);
         assertEquals(151, image.getWidth());
         assertEquals(21, image.getHeight());
-        assertEquals("iVBORw0KGgoAAAANSUhEUgAAAJcAAAAVCAAAAABujCN2AAAAk0lEQVR4XuWUQQ6AIAwE+f+nMRhhMBmxF01I54CbpYt7ail" +
-                "QO1HPmBJBBZOnf7G0zRmWWCtI2WsMWtYUpOw1Ji1rCr7t1UctawqS9rpmLWsKtuglS9x2u3nGecuB96jg1gs9MA8it+20DqYgb6/" +
-                "2sQ6m4Idelf3qbeyVzL3ml9cKUvcKK9iil+xxzcicYa9Y9sU7AGMAGYJNpfPMAAAAAElFTkSuQmCC",
-                TestUtils.encodeBase64(image, "png"));
     }
 }
