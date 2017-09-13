@@ -1,13 +1,13 @@
 package net.seabears.signature;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.awt.Color;
 import java.awt.image.RenderedImage;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class ConverterTest {
     @Test

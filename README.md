@@ -3,6 +3,7 @@
 Builds images from common customer signature serialization formats
 
 [![Build Status](https://travis-ci.org/cberes/john-hancock.svg?branch=master)](https://travis-ci.org/cberes/john-hancock)
+[![Coverage Status](https://coveralls.io/repos/github/cberes/john-hancock/badge.svg?branch=master)](https://coveralls.io/github/cberes/john-hancock?branch=master)
 
 ## Supported formats
 
@@ -16,7 +17,13 @@ Builds images from common customer signature serialization formats
 
 1. Vector text
 
+## Requirements
+
+Requires JDK 1.7+
+
 ## Installation
+
+`john-hancock` is available as a Maven artifact from Maven Central.
 
 ### Gradle
 

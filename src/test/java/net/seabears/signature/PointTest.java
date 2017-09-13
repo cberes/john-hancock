@@ -1,8 +1,8 @@
 package net.seabears.signature;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 public class PointTest {
     @Test
@@ -26,8 +26,10 @@ public class PointTest {
     @Test
     public void testEquals() {
         assertTrue(Point.valueOf(1, 2).equals(Point.valueOf(1, 2)));
+        assertFalse(Point.valueOf(1, 2).equals(Point.valueOf(1, 3)));
+        assertFalse(Point.valueOf(1, 2).equals(Point.valueOf(2, 2)));
+
         assertTrue(Point.EMPTY.equals(Point.valueOf(0, 0)));
-        assertFalse(Point.EMPTY.equals(Point.MAX_VALUE));
         assertFalse(Point.EMPTY.equals(null));
         assertFalse(Point.EMPTY.equals("not a point"));
     }

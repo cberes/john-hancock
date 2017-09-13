@@ -2,13 +2,13 @@ package net.seabears.signature;
 
 import net.seabears.signature.util.TestUtils;
 import org.apache.commons.io.IOUtils;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class ThreeByteAsciiTest {
     @Test
