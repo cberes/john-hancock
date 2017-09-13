@@ -20,7 +20,7 @@ _TODO_
 
 ## Example usage
 
-```
+```java
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +47,7 @@ public class Main {
     }
 }
 
-```java
+```
 
 ## Configuration
 
