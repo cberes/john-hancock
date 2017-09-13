@@ -3,5 +3,8 @@ sudo: false
 jdk:
   - openjdk8
   - oraclejdk8
+env:
+  global:
+    secure: 0s8yhu64/BQQlRx9zTYzLXaRHkH8vHbs3FxjvMxPdjDP2ADp7l648+18iB6k18abd1GwdwoZvrfsH36Os0UA2Wtv+qjjhG3oWzh5MCpz1vV4FWPj1823s6xwrEJXVPn57B3A9Uc0UcQiOGzeIF3o7drI+E6dx6A8e17Hr0MZk06KY6SIs0nbemiUipUDDZrYpgaU0yOBF2JwIpXgE1hrw+yIQasRq8TRsvexrawCg306nULuCX+4/eIgoC4r7jNzz76EY5Za10BEgeEi38HtMxOfHa6OsvXQsbN/XnqA0ifNAnHP7BTc+DA2XCJUKpWBdr5UTwblLwDn8fLkDuu189XHAGYwvJhXDSIHTlhVsSW1JMKPjwdXwoBC9kffkbMmEOsX2POMdGqQzNMPanmOyqgZ/bpelCH2scm/o4Rmmo5vhtoEWTvPds8qWdaeVw3QksbqWYL2fdjbHNrAdq6tlPaSz++9sx+WrGL67GLmbWfS2l0nsyr9+GK1yP55/AowvnBmXjRELZlOV0rO/WZ1Didou4O1WmtZt4rQXSr+PlAq1vGASACXXI1CUI1WEfe726bYy4e6CmnUrU14uZxNKkfRLt33PW2F5hDqxt4KlySP4BY1UgZSGRGajhUD9/K8HD/jD0DMEik8zdV6LjVW3/fOTsHbnaFB6kXzQvuaOEY=
 after_success:
-  - ./gradlew jacocoTestReport coveralls
+  - "./gradlew jacocoTestReport coveralls"
