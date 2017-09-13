@@ -51,7 +51,7 @@ public class Main {
 
 ## Configuration
 
-[Converter](src/main/java/net/seabears/Converter.java) accepts a [Config](src/main/java/net/seabears/Config.java) instance. This allows you to configure
+[Converter](src/main/java/net/seabears/signature/Converter.java) accepts a [Config](src/main/java/net/seabears/signature/Config.java) instance. This allows you to configure
 
 1. background color
 2. foreground color
