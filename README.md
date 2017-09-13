@@ -2,6 +2,8 @@
 
 Builds images from common customer signature serialization formats
 
+[![Build Status](https://travis-ci.org/cberes/john-hancock.svg?branch=master)](https://travis-ci.org/cberes/john-hancock)
+
 ## Supported formats
 
 ### Vantiv

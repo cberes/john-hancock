@@ -1,4 +1,5 @@
 apply plugin: 'java-library'
+apply plugin: 'maven-publish'
 
 group = 'net.seabears'
 version = '1.0.0'
@@ -22,3 +23,26 @@ dependencies {
     testImplementation 'commons-io:commons-io:2.5'
 }
 
+task javadocJar(type: Jar) {
+    from javadoc
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact javadocJar {
+                classifier 'javadoc'
+            }
+
+            artifact sourceJar {
+                classifier 'sources'
+            }
+        }
+    }
+}
