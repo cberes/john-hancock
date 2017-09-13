@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 class CurvesBuilder {
-    private final List<Curve> curves = new LinkedList<>();
+    private final LinkedList<Curve> curves = new LinkedList<>();
     private Curve current = new Curve();
 
     void add(final Point p) {
@@ -19,6 +19,10 @@ class CurvesBuilder {
         if (!current.isEmpty()) {
             current = new Curve();
         }
+    }
+
+    Point getLast() {
+        return curves.getLast().getLast();
     }
 
     List<Curve> build() {
