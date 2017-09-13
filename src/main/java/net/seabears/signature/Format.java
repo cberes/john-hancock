@@ -1,5 +1,8 @@
 package net.seabears.signature;
 
+/**
+ * Supported signature serialization formats.
+ */
 public enum Format {
     POINTS_BIG_ENDIAN(new FourBytePointFactory(Endianness.BIG)),
     POINTS_LITTLE_ENDIAN(new FourBytePointFactory(Endianness.LITTLE)),

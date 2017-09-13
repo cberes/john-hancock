@@ -8,17 +8,35 @@ import java.util.function.BiPredicate;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * Converts serialized signature data to {@link RenderedImage} instances.
+ *
+ * This implementation is thread-safe.
+ */
 public class Converter {
     private final Config config;
 
+    /**
+     * Creates a new instance with the default configuration.
+     */
     public Converter() {
         this(Config.DEFAULT);
     }
 
+    /**
+     * Creates a new instance with the specified configuration.
+     * @param config configuration
+     */
     public Converter(final Config config) {
         this.config = config;
     }
 
+    /**
+     * Builds an image from the specified data using the specified deserialization format.
+     * @param data serialized signature data
+     * @param format deserialization format
+     * @return rendered image
+     */
     public RenderedImage convert(final byte[] data, final Format format) {
         final List<Curve> points = format.getFactory().parse(data);
         return convert(points);
@@ -61,7 +79,7 @@ public class Converter {
         final int totalPadding = config.getPadding() * 2;
         final int width = maximum.getX() - minimum.getX() + 1 + totalPadding;
         final int height = maximum.getY() - minimum.getY() + 1 + totalPadding;
-        final int imageType = config.isGrayscale() ? BufferedImage.TYPE_BYTE_GRAY : BufferedImage.TYPE_INT_ARGB;
+        final int imageType = config.isGreyscale() ? BufferedImage.TYPE_BYTE_GRAY : BufferedImage.TYPE_INT_ARGB;
         return new BufferedImage(width, height, imageType);
     }
 
