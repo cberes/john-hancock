@@ -1,11 +1,12 @@
 package net.seabears.signature.util;
 
+import org.apache.commons.codec.binary.Base64;
+
 import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
 
 public final class TestUtils {
     private TestUtils() {
@@ -29,7 +30,7 @@ public final class TestUtils {
         try {
             final ByteArrayOutputStream output = new ByteArrayOutputStream();
             ImageIO.write(image, format, output);
-            return Base64.getEncoder().encodeToString(output.toByteArray());
+            return Base64.encodeBase64String(output.toByteArray());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
