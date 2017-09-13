@@ -1,5 +1,6 @@
 apply plugin: 'java-library'
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 group = 'net.seabears'
 version = '1.0.0'
@@ -24,24 +25,60 @@ dependencies {
 }
 
 task javadocJar(type: Jar) {
+    classifier = 'javadoc'
     from javadoc
 }
 
-task sourceJar(type: Jar) {
-    from sourceSets.main.allJava
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
+artifacts {
+    archives javadocJar, sourcesJar
+}
 
-            artifact javadocJar {
-                classifier 'javadoc'
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2') {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
             }
 
-            artifact sourceJar {
-                classifier 'sources'
+            snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots') {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'john-hancock'
+                packaging 'jar'
+                description 'Build images from common customer-signature data serialization formats.'
+                url 'https://github.com/cberes/john-hancock'
+
+                scm {
+                    url 'https://github.com/cberes/john-hancock.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'https://mit-license.org/license.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'cberes'
+                        name 'Corey Beres'
+                        email 'corey.beres@gmail.com'
+                    }
+                }
             }
         }
     }
