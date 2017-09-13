@@ -18,7 +18,21 @@ Builds images from common customer signature serialization formats
 
 ## Installation
 
-_TODO_
+### Gradle
+
+```groovy
+compile 'net.seabears:john-hancock:1.0.0'
+```
+
+### Maven
+
+```xml
+<dependency>
+  <groupId>net.seabears</groupId>
+  <artifactId>john-hancock</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
 
 ## Example usage
 
