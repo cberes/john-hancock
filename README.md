@@ -19,7 +19,7 @@ Builds images from common customer signature serialization formats
 
 ## Requirements
 
-Requires JDK 1.7+
+Requires JDK 1.7 or greater
 
 ## Installation
 
@@ -28,7 +28,7 @@ Requires JDK 1.7+
 ### Gradle
 
 ```groovy
-compile 'net.seabears:john-hancock:1.0.0'
+compile 'net.seabears:john-hancock:1.0.1'
 ```
 
 ### Maven
@@ -37,7 +37,7 @@ compile 'net.seabears:john-hancock:1.0.0'
 <dependency>
   <groupId>net.seabears</groupId>
   <artifactId>john-hancock</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
