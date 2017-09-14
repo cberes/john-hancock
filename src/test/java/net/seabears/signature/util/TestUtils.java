@@ -13,6 +13,14 @@ public final class TestUtils {
         throw new UnsupportedOperationException("cannot instantiate" + getClass());
     }
 
+    public static void saveIfEnabled(final RenderedImage image, final String name) {
+        final String path = System.getProperty("test.image.path", "");
+        if (!path.isEmpty()) {
+            new File(path).mkdirs();
+            save(image, path + '/' + name);
+        }
+    }
+
     public static void save(final RenderedImage image, final String path) {
         try {
             ImageIO.write(image, getFileExtension(path), new File(path));

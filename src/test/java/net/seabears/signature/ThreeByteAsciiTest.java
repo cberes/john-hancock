@@ -1,5 +1,6 @@
 package net.seabears.signature;
 
+import net.seabears.signature.util.TestUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
@@ -17,5 +18,6 @@ public class ThreeByteAsciiTest {
         final RenderedImage image = new Converter().convert(data, Format.THREE_BYTE_ASCII);
         assertEquals(346, image.getWidth());
         assertEquals(86, image.getHeight());
+        TestUtils.saveIfEnabled(image, getClass().getSimpleName() + ".testImage.png");
     }
 }

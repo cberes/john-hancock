@@ -1,5 +1,6 @@
 package net.seabears.signature;
 
+import net.seabears.signature.util.TestUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
@@ -34,6 +35,7 @@ public class VectorTextTest {
         final RenderedImage image = createImage("vector-0.txt");
         assertEquals(101, image.getWidth());
         assertEquals(101, image.getHeight());
+        TestUtils.saveIfEnabled(image, getClass().getSimpleName() + ".testLetterX.png");
     }
 
     private RenderedImage createImage(final String name) throws IOException {
@@ -46,6 +48,7 @@ public class VectorTextTest {
         final RenderedImage image = createImage("vector-1.txt");
         assertEquals(81, image.getWidth());
         assertEquals(40, image.getHeight());
+        TestUtils.saveIfEnabled(image, getClass().getSimpleName() + ".testTrough.png");
     }
 
     @Test
@@ -53,5 +56,6 @@ public class VectorTextTest {
         final RenderedImage image = createImage("vector-2.txt");
         assertEquals(55, image.getWidth());
         assertEquals(14, image.getHeight());
+        TestUtils.saveIfEnabled(image, getClass().getSimpleName() + ".testXPowNeg1.png");
     }
 }

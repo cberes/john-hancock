@@ -1,5 +1,6 @@
 package net.seabears.signature;
 
+import net.seabears.signature.util.TestUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
@@ -46,5 +47,6 @@ public class PointsLittleEndianTest {
         final RenderedImage image = new Converter().convert(data, Format.POINTS_LITTLE_ENDIAN);
         assertEquals(12, image.getWidth());
         assertEquals(12, image.getHeight());
+        TestUtils.saveIfEnabled(image, getClass().getSimpleName() + ".testImage.png");
     }
 }

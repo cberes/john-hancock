@@ -23,6 +23,10 @@ dependencies {
     testImplementation 'commons-io:commons-io:2.5'
 }
 
+test {
+    systemProperty 'test.image.path', "$buildDir/test-images"
+}
+
 jacocoTestReport {
     reports {
         csv.enabled = false
