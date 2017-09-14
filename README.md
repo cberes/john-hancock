@@ -80,10 +80,10 @@ public class Main {
 2. foreground color
 3. padding
 
-# More information
+## More information
 
-- [Vantiv points format](https://developer.vantiv.com/thread/1830)
 - [3-byte ASCII](https://social.msdn.microsoft.com/Forums/vstudio/en-US/1dc7421a-56dc-4698-ac33-9c79e25fde36/saving-series-of-point-data-in-c)
+- [Vantiv points format](https://developer.vantiv.com/thread/1830)
 
 ## License
 
