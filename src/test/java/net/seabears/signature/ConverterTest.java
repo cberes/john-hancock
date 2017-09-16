@@ -1,81 +1,65 @@
 package net.seabears.signature;
 
+import net.seabears.signature.util.ImageUtils;
 import org.junit.Test;
 
-import java.awt.Color;
 import java.awt.image.RenderedImage;
-import java.util.List;
+import java.io.IOException;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class ConverterTest {
     @Test
-    public void testConvertSquare() {
-        final List<Curve> points = buildPointsForSquare();
-        final RenderedImage image = new Converter().convert(points);
-        assertEquals(111, image.getWidth());
-        assertEquals(56, image.getHeight());
-        assertArrayEquals(new int[] {0}, image.getData().getPixel(0, 0, new int[1]));
-        assertArrayEquals(new int[] {255}, image.getData().getPixel(1, 1, new int[1]));
-    }
-
-    private static List<Curve> buildPointsForSquare() {
-        final CurvesBuilder builder = new CurvesBuilder();
-        builder.add(Point.valueOf(-10, -5));
-        builder.add(Point.valueOf(100, -5));
-        builder.newCurve();
-        builder.add(Point.valueOf(100, -5));
-        builder.add(Point.valueOf(100, 50));
-        builder.newCurve();
-        builder.add(Point.valueOf(100, 50));
-        builder.add(Point.valueOf(-10, 50));
-        builder.newCurve();
-        builder.add(Point.valueOf(-10, 50));
-        builder.add(Point.valueOf(-10, -5));
-        return builder.build();
+    public void testPointsBigEndian() throws IOException {
+        final byte[] data = ImageUtils.readData("points-big-endian.bin");
+        final RenderedImage image = new Converter().convert(data, Format.POINTS_BIG_ENDIAN);
+        assertEquals(151, image.getWidth());
+        assertEquals(21, image.getHeight());
+        ImageUtils.saveIfEnabled(image, getClass() + ".testPointsBigEndian.png");
     }
 
     @Test
-    public void testConvertSquareWithPadding() {
-        final List<Curve> points = buildPointsForSquare();
-        final Config config = Config.builder().withPadding(10).build();
-        final RenderedImage image = new Converter(config).convert(points);
-        assertEquals(131, image.getWidth());
-        assertEquals(76, image.getHeight());
-        assertArrayEquals(new int[] {255}, image.getData().getPixel(0, 0, new int[1]));
-        assertArrayEquals(new int[] {0}, image.getData().getPixel(10, 10, new int[1]));
+    public void testPointsLittleEndian() throws IOException {
+        final byte[] data = ImageUtils.readData("points-little-endian.bin");
+        final RenderedImage image = new Converter().convert(data, Format.POINTS_LITTLE_ENDIAN);
+        assertEquals(12, image.getWidth());
+        assertEquals(12, image.getHeight());
+        ImageUtils.saveIfEnabled(image, getClass() + ".testPointsLittleEndian.png");
     }
 
     @Test
-    public void testConvertSquareWithColors() {
-        final List<Curve> points = buildPointsForSquare();
-        final Config config = Config.builder().withBackground(Color.BLUE).withForeground(Color.RED).build();
-        final RenderedImage image = new Converter(config).convert(points);
-        assertEquals(111, image.getWidth());
-        assertEquals(56, image.getHeight());
-        assertArrayEquals(new int[] {255, 0, 0, 255}, image.getData().getPixel(0, 0, new int[4]));
-        assertArrayEquals(new int[] {0, 0, 255, 255}, image.getData().getPixel(1, 1, new int[4]));
+    public void testThreeByteAscii() throws IOException {
+        final byte[] data = ImageUtils.readData("3-byte-ascii.txt");
+        final RenderedImage image = new Converter().convert(data, Format.THREE_BYTE_ASCII);
+        assertEquals(346, image.getWidth());
+        assertEquals(86, image.getHeight());
+        ImageUtils.saveIfEnabled(image, getClass() + ".testThreeByteAscii.png");
     }
 
     @Test
-    public void testConvertLightningBolt() {
-        final List<Curve> points = buildPointsForLightningBolt();
-        final RenderedImage image = new Converter().convert(points);
-        assertEquals(111, image.getWidth());
-        assertEquals(56, image.getHeight());
+    public void testLetterX() throws IOException {
+        final byte[] data = ImageUtils.readData("vector-0.txt");
+        final RenderedImage image = new Converter().convert(data, Format.VECTOR_TEXT);
+        assertEquals(101, image.getWidth());
+        assertEquals(101, image.getHeight());
+        ImageUtils.saveIfEnabled(image, getClass() + ".testLetterX.png");
     }
 
-    private static List<Curve> buildPointsForLightningBolt() {
-        final CurvesBuilder builder = new CurvesBuilder();
-        builder.add(Point.valueOf(-10, -5));
-        builder.add(Point.valueOf(45, 30));
-        builder.newCurve();
-        builder.add(Point.valueOf(45, 30));
-        builder.add(Point.valueOf(45, 15));
-        builder.newCurve();
-        builder.add(Point.valueOf(45, 15));
-        builder.add(Point.valueOf(100, 50));
-        return builder.build();
+    @Test
+    public void testTrough() throws IOException {
+        final byte[] data = ImageUtils.readData("vector-1.txt");
+        final RenderedImage image = new Converter().convert(data, Format.VECTOR_TEXT);
+        assertEquals(81, image.getWidth());
+        assertEquals(40, image.getHeight());
+        ImageUtils.saveIfEnabled(image, getClass() + ".testTrough.png");
+    }
+
+    @Test
+    public void testXPowNeg1() throws IOException {
+        final byte[] data = ImageUtils.readData("vector-2.txt");
+        final RenderedImage image = new Converter().convert(data, Format.VECTOR_TEXT);
+        assertEquals(55, image.getWidth());
+        assertEquals(14, image.getHeight());
+        ImageUtils.saveIfEnabled(image, getClass() + ".testXPowNeg1.png");
     }
 }

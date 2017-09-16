@@ -5,7 +5,7 @@ import java.util.Objects;
 final class Point {
     static final Point MAX_VALUE = new Point(Integer.MAX_VALUE, Integer.MAX_VALUE);
     static final Point MIN_VALUE = new Point(Integer.MIN_VALUE, Integer.MIN_VALUE);
-    static final Point EMPTY = new Point(0, 0);
+    static final Point ORIGIN = new Point(0, 0);
 
     private final int x, y;
 
@@ -54,8 +54,8 @@ final class Point {
     }
 
     static Point valueOf(final int x, final int y) {
-        if (x == EMPTY.x && y == EMPTY.y) {
-            return EMPTY;
+        if (x == ORIGIN.x && y == ORIGIN.y) {
+            return ORIGIN;
         } else {
             return new Point(x, y);
         }

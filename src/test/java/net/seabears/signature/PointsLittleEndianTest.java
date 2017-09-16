@@ -1,12 +1,9 @@
 package net.seabears.signature;
 
-import net.seabears.signature.util.TestUtils;
-import org.apache.commons.io.IOUtils;
+import net.seabears.signature.util.ImageUtils;
 import org.junit.Test;
 
-import java.awt.image.RenderedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -41,12 +38,11 @@ public class PointsLittleEndianTest {
     }
 
     @Test
-    public void testImage() throws IOException {
-        final InputStream input = getClass().getResourceAsStream("/points-little-endian.bin");
-        final byte[] data = IOUtils.toByteArray(input);
-        final RenderedImage image = new Converter().convert(data, Format.POINTS_LITTLE_ENDIAN);
-        assertEquals(12, image.getWidth());
-        assertEquals(12, image.getHeight());
-        TestUtils.saveIfEnabled(image, getClass().getSimpleName() + ".testImage.png");
+    public void testPointsFromImage() throws IOException {
+        final byte[] data = ImageUtils.readData("points-little-endian.bin");
+        final List<Curve> points = new FourBytePointFactory(Endianness.LITTLE).parse(data);
+        assertEquals(1, points.size());
+        assertEquals(12, points.get(0).getPoints().size());
+        // TODO verify points
     }
 }

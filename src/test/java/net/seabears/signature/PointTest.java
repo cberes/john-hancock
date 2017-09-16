@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 public class PointTest {
     @Test
     public void testValueOf() {
-        assertSame(Point.EMPTY, Point.valueOf(0, 0));
-        assertNotSame(Point.EMPTY, Point.valueOf(-1, -1));
+        assertSame(Point.ORIGIN, Point.valueOf(0, 0));
+        assertNotSame(Point.ORIGIN, Point.valueOf(-1, -1));
     }
 
     @Test
@@ -29,9 +29,9 @@ public class PointTest {
         assertFalse(Point.valueOf(1, 2).equals(Point.valueOf(1, 3)));
         assertFalse(Point.valueOf(1, 2).equals(Point.valueOf(2, 2)));
 
-        assertTrue(Point.EMPTY.equals(Point.valueOf(0, 0)));
-        assertFalse(Point.EMPTY.equals(null));
-        assertFalse(Point.EMPTY.equals("not a point"));
+        assertTrue(Point.ORIGIN.equals(Point.valueOf(0, 0)));
+        assertFalse(Point.ORIGIN.equals(null));
+        assertFalse(Point.ORIGIN.equals("not a point"));
     }
 
     @Test
@@ -39,6 +39,6 @@ public class PointTest {
         final Point a = Point.valueOf(4, 10);
         final Point b = Point.valueOf(4, 10);
         assertEquals(a.hashCode(), b.hashCode());
-        assertNotEquals(a.hashCode(), Point.EMPTY);
+        assertNotEquals(a.hashCode(), Point.ORIGIN);
     }
 }

@@ -1,15 +1,15 @@
 package net.seabears.signature.util;
 
-import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.RenderedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
-public final class TestUtils {
-    private TestUtils() {
+public final class ImageUtils {
+    private ImageUtils() {
         throw new UnsupportedOperationException("cannot instantiate" + getClass());
     }
 
@@ -34,13 +34,8 @@ public final class TestUtils {
         return parts[parts.length - 1];
     }
 
-    public static String encodeBase64(final RenderedImage image, final String format) {
-        try {
-            final ByteArrayOutputStream output = new ByteArrayOutputStream();
-            ImageIO.write(image, format, output);
-            return Base64.encodeBase64String(output.toByteArray());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public static byte[] readData(final String name) throws IOException {
+        final InputStream stream = ImageUtils.class.getResourceAsStream('/' + name);
+        return IOUtils.toByteArray(stream);
     }
 }
