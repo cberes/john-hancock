@@ -4,6 +4,7 @@ Builds images from common customer signature serialization formats
 
 [![Build Status](https://travis-ci.org/cberes/john-hancock.svg?branch=master)](https://travis-ci.org/cberes/john-hancock)
 [![Coverage Status](https://coveralls.io/repos/github/cberes/john-hancock/badge.svg?branch=master)](https://coveralls.io/github/cberes/john-hancock?branch=master)
+[![Maven Central](https://img.shields.io/maven-central/v/net.seabears/john-hancock.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22net.seabears%22%20AND%20a%3A%22john-hancock%22)
 
 ## Supported formats
 
