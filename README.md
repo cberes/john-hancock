@@ -7,7 +7,7 @@ Builds images from common customer signature serialization formats
 
 ## Supported formats
 
-### Vantiv
+### Worldpay (Vantiv)
 
 1. Points, big-endian
 2. Points, little-endian
@@ -83,11 +83,11 @@ public class Main {
 ## More information
 
 - [3-byte ASCII](https://social.msdn.microsoft.com/Forums/vstudio/en-US/1dc7421a-56dc-4698-ac33-9c79e25fde36/saving-series-of-point-data-in-c)
-- [Vantiv points format](https://developer.vantiv.com/thread/1830)
+- [Worldpay/Vantiv points format](https://developer.vantiv.com/thread/1830)
 
 ## License
 
-Copyright © 2017 Corey Beres
+Copyright © 2017, 2019 Corey Beres
 
 Distributed under the MIT license
 
