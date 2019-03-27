@@ -3,7 +3,7 @@ plugins {
     id 'maven'
     id 'signing'
     id 'jacoco'
-    id 'com.github.kt3k.coveralls' version '2.8.1'
+    id 'com.github.kt3k.coveralls' version '2.8.2'
 }
 
 group = 'net.seabears'
