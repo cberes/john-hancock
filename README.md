@@ -4,7 +4,7 @@ Builds images from common customer signature serialization formats
 
 [![Build Status](https://travis-ci.org/cberes/john-hancock.svg?branch=master)](https://travis-ci.org/cberes/john-hancock)
 [![Coverage Status](https://coveralls.io/repos/github/cberes/john-hancock/badge.svg?branch=master)](https://coveralls.io/github/cberes/john-hancock?branch=master)
-[![Maven Central](https://img.shields.io/maven-central/v/net.seabears/john-hancock.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22net.seabears%22%20AND%20a%3A%22john-hancock%22)
+[![Maven Central](https://img.shields.io/maven-central/v/com.spinthechoice/john-hancock.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.spinthechoice%22%20AND%20a%3A%22john-hancock%22)
 
 ## Supported formats
 
@@ -29,14 +29,14 @@ Requires JDK 1.7 or greater
 ### Gradle
 
 ```groovy
-compile 'net.seabears:john-hancock:1.0.1'
+compile 'com.spinthechoice:john-hancock:1.0.1'
 ```
 
 ### Maven
 
 ```xml
 <dependency>
-  <groupId>net.seabears</groupId>
+  <groupId>com.spinthechoice</groupId>
   <artifactId>john-hancock</artifactId>
   <version>1.0.1</version>
 </dependency>
@@ -51,8 +51,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.seabears.signature.Converter;
-import net.seabears.signature.Format;
+import com.spinthechoice.signature.Converter;
+import com.spinthechoice.signature.Format;
 
 public class Main {
     static class Signature {
