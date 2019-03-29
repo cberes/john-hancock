@@ -1,4 +1,4 @@
-package net.seabears.signature;
+package com.spinthechoice.signature;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

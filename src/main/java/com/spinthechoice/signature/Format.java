@@ -1,4 +1,4 @@
-package net.seabears.signature;
+package com.spinthechoice.signature;
 
 /**
  * Supported signature serialization formats.

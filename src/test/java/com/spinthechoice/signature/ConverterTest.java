@@ -1,6 +1,6 @@
-package net.seabears.signature;
+package com.spinthechoice.signature;
 
-import net.seabears.signature.util.ImageUtils;
+import com.spinthechoice.signature.util.ImageUtils;
 import org.junit.Test;
 
 import java.awt.image.RenderedImage;

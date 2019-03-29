@@ -1,12 +1,13 @@
-package net.seabears.signature;
+package com.spinthechoice.signature;
 
-import net.seabears.signature.util.ImageUtils;
+import com.spinthechoice.signature.util.ImageUtils;
+import com.spinthechoice.signature.util.PointUtils;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.List;
 
-import static net.seabears.signature.util.PointUtils.pt;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
@@ -35,7 +36,7 @@ public class PointsLittleEndianTest {
         final byte[] data = new byte[] {1, 0, 2, 0, 3, 0, 4, 0, -1, -1, -1, -1};
         final List<Curve> points = new FourBytePointFactory(Endianness.LITTLE).parse(data);
         assertEquals(1, points.size());
-        assertThat(points.get(0).getPoints(), contains(pt(1, 2), pt(3, 4)));
+        assertThat(points.get(0).getPoints(), Matchers.contains(PointUtils.pt(1, 2), PointUtils.pt(3, 4)));
     }
 
     @Test
@@ -43,8 +44,8 @@ public class PointsLittleEndianTest {
         final byte[] data = ImageUtils.readData("points-little-endian.bin");
         final List<Curve> points = new FourBytePointFactory(Endianness.LITTLE).parse(data);
         assertEquals(1, points.size());
-        assertThat(points.get(0).getPoints(), contains(pt(1315, 577), pt(1314, 577), pt(1312, 578),
-                pt(1310, 579), pt(1307, 580), pt(1305, 581), pt(1305, 582), pt(1304, 584),
-                pt(1305, 585), pt(1306, 586), pt(1307, 587), pt(1311, 588)));
+        assertThat(points.get(0).getPoints(), Matchers.contains(PointUtils.pt(1315, 577), PointUtils.pt(1314, 577), PointUtils.pt(1312, 578),
+                PointUtils.pt(1310, 579), PointUtils.pt(1307, 580), PointUtils.pt(1305, 581), PointUtils.pt(1305, 582), PointUtils.pt(1304, 584),
+                PointUtils.pt(1305, 585), PointUtils.pt(1306, 586), PointUtils.pt(1307, 587), PointUtils.pt(1311, 588)));
     }
 }

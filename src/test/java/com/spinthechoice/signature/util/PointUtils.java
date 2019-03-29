@@ -1,10 +1,10 @@
-package net.seabears.signature.util;
+package com.spinthechoice.signature.util;
 
 import java.lang.reflect.Method;
 
 /**
  * Utilities for the Point class.
- * Unfortunately, the Point class is package-private is a different package.
+ * Unfortunately, the Point class is package-private and in a different package.
  */
 public final class PointUtils {
     private static final Class<?> POINT;
@@ -12,7 +12,7 @@ public final class PointUtils {
 
     static {
         try {
-            POINT = Class.forName("net.seabears.signature.Point");
+            POINT = Class.forName("com.spinthechoice.signature.Point");
             VALUE_OF = POINT.getDeclaredMethod("valueOf", int.class, int.class);
             VALUE_OF.setAccessible(true);
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-package net.seabears.signature;
+package com.spinthechoice.signature;
 
 import java.awt.image.RenderedImage;
 import java.util.List;

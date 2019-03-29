@@ -1,4 +1,4 @@
-package net.seabears.signature.util;
+package com.spinthechoice.signature.util;
 
 import org.apache.commons.io.IOUtils;
 
